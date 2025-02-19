@@ -1,0 +1,446 @@
+#
+# Query
+#
+
+query getDashboard {
+  listUsersDashboard { ...ListUsersManagerFields }
+  listOrdersDashboard { ...ListOrdersManagerFields }
+}
+
+query getUser($id: ID!) {
+  getUser(id: $id) { ...UserManagerFields }
+}
+
+query listUsers($status: String!) {
+  listUsers(filter: { status: $status }) { ...ListUsersManagerFields }
+}
+
+query listAllUsers {
+  user: listUsers(filter: { status: "user" }) { ...ListUsersManagerFields }
+  guest: listUsers(filter: { status: "guest" }) { ...ListUsersManagerFields }
+  pending: listUsers(filter: { status: "pending" }) { ...ListUsersManagerFields }
+}
+
+query listUsersDashboard {
+  listUsersDashboard {
+    pending { ...ListUsersManagerFields }
+    verified { ...ListUsersManagerFields }
+  }
+}
+
+query getProduct($id: ID!) {
+  getProduct(id: $id) { ...ProductManagerFields }
+}
+
+query listProducts {
+  listProducts { ...ListProductsManagerFields }
+}
+
+query getProductIdByName($value: String!) {
+  id: getProductIdByName(value: $value)
+}
+
+query getProductIdBySlug($value: String!) {
+  id: getProductIdBySlug(value: $value)
+}
+
+query getOrder($id: ID!) {
+  order: getOrder(id: $id) { ...OrderManagerFields }
+  products: listOrderProducts(id: $id) { ...ListOrderProductsManagerFields }
+  events: listOrderEvents(filter: { orderId: $id }) { ...OrderEventManagerFields }
+  refunds: listOrderRefunds(id: $id) { ...OrderRefundManagerFields }
+}
+
+query getOrderNextId($id: ID!, $forward: Boolean!) {
+  id: getOrderNextId(id: $id, forward: $forward)
+}
+
+query listOrders($status: String!) {
+  listOrders(filter: { status: $status }) { ...ListOrdersManagerFields }
+}
+
+query listOrdersByQuarter($quarter: Int!) {
+  listOrdersByQuarter(filter: { quarter: $quarter }) { ...ListOrdersManagerFields }
+}
+
+query listOrdersDashboard {
+  pending: listOrders(filter: { status: "pending" }) { ...ListOrdersManagerFields }
+  processing: listOrders(filter: { status: "processing" }) { ...ListOrdersManagerFields }
+  shipped: listOrders(filter: { status: "shipped" }) { ...ListOrdersManagerFields }
+  complete: listOrders(filter: { status: "complete" }) { ...ListOrdersManagerFields }
+  canceled: listOrders(filter: { status: "canceled" }) { ...ListOrdersManagerFields }
+  refund: listOrders(filter: { status: "refund" }) { ...ListOrdersManagerFields }
+  refunded: listOrders(filter: { status: "refunded" }) { ...ListOrdersManagerFields }
+}
+
+query listOrderEvents ($filter: ListOrderEventsFilterInput!, $direction: String, $limit: Int, $nextToken: String) {
+  listOrderEvents(filter: $filter, direction: $direction, limit: $limit, nextToken: $nextToken) {
+    ...OrderEventManagerFields
+  }
+}
+
+query listOrderRefundEvents($filter: ListOrderRefundEventsFilterInput!, $direction: String, $limit: Int, $nextToken: String) {
+  events: listOrderRefundEvents(filter: $filter, direction: $direction, limit: $limit, nextToken: $nextToken) {
+    ...OrderRefundEventManagerFields
+  }
+}
+
+query listWarehouses {
+  listWarehouses { ...ListWarehousesManagerFields }
+}
+
+query getCategory($id: ID!) {
+  getCategory(id: $id) { ...CategoryManagerFields }
+}
+
+query getCategoryIdByName($value: String!) {
+  id: getCategoryIdByName(value: $value)
+}
+
+query getCategoryIdBySlug($value: String!) {
+  id: getCategoryIdBySlug(value: $value)
+}
+
+query listCategories {
+  listCategories { ...ListCategoriesManagerFields }
+}
+
+query getManufacturer($id: ID!) {
+  getManufacturer(id: $id) { ...ManufacturerManagerFields }
+}
+
+query listManufacturers {
+  listManufacturers { ...ListManufacturersManagerFields }
+}
+
+query getManufacturerIdByName($value: String!) {
+  id: getManufacturerIdByName(value: $value)
+}
+
+query getManufacturerIdBySlug($value: String!) {
+  id: getManufacturerIdBySlug(value: $value)
+}
+
+query getCertificate($id: ID!) {
+  getCertificate(id: $id) { ...CertificateManagerFields }
+}
+
+query listCertificates {
+  listCertificates { ...ListCertificatesManagerFields }
+}
+
+query listSiteDocuments {
+  listSiteDocuments { ...ListSiteDocumentsManagerFields }
+}
+
+query getGroup($id: ID!) {
+  group: getGroup(id: $id) { ...GroupManagerFields }
+  users: listGroupUsers(id: $id) { ...GroupUserManagerFields }
+  products: listGroupProducts(id: $id) { ...GroupProductManagerFields }
+}
+
+query listGroups {
+  listGroups { ...ListGroupsManagerFields }
+}
+
+query getGroupIdByName($value: String!) {
+  id: getGroupIdByName(value: $value)
+}
+
+query getGroupIdBySlug($value: String!) {
+  id: getGroupIdBySlug(value: $value)
+}
+
+query listGroupUsers {
+  listGroupUsers { ...GroupUserManagerFields }
+}
+
+query listGroupProducts {
+  listGroupProducts { ...GroupProductManagerFields }
+}
+
+#
+# Mutation
+#
+
+mutation createUser($input: UserInput!) {
+  createUser(input: $input) { ...UserManagerFields }
+}
+
+mutation updateUser($input: UserInput!) {
+  updateUser(input: $input) { ...UserManagerFields }
+}
+
+mutation createGroup($input: GroupInput!) {
+  createGroup(input: $input) { ...GroupManagerFields }
+}
+
+mutation updateGroup($input: GroupInput!) {
+  updateGroup(input: $input) { ...GroupManagerFields }
+}
+
+mutation createGroupUser($input: GroupUserInput!) {
+  createGroupUser(input: $input) { ...GroupUserManagerFields }
+}
+
+mutation deleteGroupUser($input: GroupUserInput!) {
+  deleteGroupUser(input: $input) { ...GroupUserManagerFields }
+}
+
+mutation updateGroupProduct($input: GroupProductInput!) {
+  updateGroupProduct(input: $input) { ...GroupProductManagerFields }
+}
+
+mutation deleteGroupProduct($input: GroupProductInput!) {
+  deleteGroupProduct(input: $input) { ...GroupProductManagerFields }
+}
+
+mutation updateOrder($input: OrderInput!) {
+  updateOrder(input: $input) { ...OrderManagerFields }
+}
+
+mutation createOrderEvent($input: OrderEventInput!) {
+  createOrderEvent(input: $input) { ...OrderEventManagerFields }
+}
+
+mutation updateOrderRefund($order: OrderInput!, $event: OrderRefundEventInput!) {
+  order: updateOrder(input: $order) { ...OrderManagerFields }
+  event: createOrderRefundEvent(input: $event) { ...OrderRefundEventManagerFields }
+}
+
+mutation createOrderRefundEvent($input: OrderRefundEventInput!) {
+  createOrderRefundEvent(input: $input) { ...OrderRefundEventManagerFields }
+}
+
+mutation createCategory($input: CategoryInput!) {
+  createCategory(input: $input) { ...CategoryManagerFields }
+}
+
+mutation updateCategory($input: CategoryInput!) {
+  updateCategory(input: $input) { ...CategoryManagerFields }
+}
+
+mutation deleteCategory($input: CategoryInput!) {
+  deleteCategory(input: $input) { ...CategoryManagerFields }
+}
+
+mutation createCategoryProduct($input: CategoryProductInput!) {
+  createCategoryProduct(input: $input) { ...CategoryProductManagerFields }
+}
+
+mutation deleteCategoryProduct($input: CategoryProductInput!) {
+  deleteCategoryProduct(input: $input) { ...CategoryProductManagerFields }
+}
+
+mutation createProduct($input: ProductInput!) {
+  createProduct(input: $input) { ...ProductManagerFields }
+}
+
+mutation updateProduct($input: ProductInput!) {
+  updateProduct(input: $input) { ...ProductManagerFields }
+}
+
+mutation deleteProduct($input: ProductInput!) {
+  deleteProduct(input: $input) { ...ProductManagerFields }
+}
+
+mutation createProductVersion($input: ProductVersionInput!) {
+  createProductVersion(input: $input) { ...ProductVersionManagerFields }
+}
+
+mutation updateProductVersion($input: ProductVersionInput!) {
+  updateProductVersion(input: $input) { ...ProductVersionManagerFields }
+}
+
+mutation deleteProductVersion($input: ProductVersionInput!) {
+  deleteProductVersion(input: $input) { ...ProductVersionManagerFields }
+}
+
+mutation createManufacturer($input: ManufacturerInput!) {
+  createManufacturer(input: $input) { ...ManufacturerManagerFields }
+}
+
+mutation updateManufacturer($input: ManufacturerInput!) {
+  updateManufacturer(input: $input) { ...ManufacturerManagerFields }
+}
+
+mutation createSiteDocument($input: SiteDocumentInput!) {
+  createSiteDocument(input: $input) { ...SiteDocumentManagerFields }
+}
+
+mutation deleteSiteDocument($input: SiteDocumentInput!) {
+  deleteSiteDocument(input: $input) { ...SiteDocumentManagerFields }
+}
+
+mutation netlifyDeploy {
+  netlifyDeploy
+}
+
+#
+# Fragment
+#
+
+fragment ListUsersManagerFields on User {
+  id, role, createdAt, firstName, lastName, email,
+  businessName, businessPhone
+}
+
+fragment UserManagerFields on User {
+  id, role, firstName, lastName, email, phone,
+  businessName, businessPhone, isAddressVerified,
+  addressLine1, addressLine2, country, city, state, zip,
+  isVerified, note, groups,
+  fileResellersPermit, resellersPermitUntil,
+  fileTaxExemptionForm, taxExemptionUntil
+}
+
+fragment GroupManagerFields on Group {
+  id, name, slug, desc
+}
+
+fragment ListGroupsManagerFields on Group {
+  id, name, slug, desc, numberOfUsers
+}
+
+fragment GroupUserManagerFields on GroupUser {
+  groupId, userId
+}
+
+fragment GroupProductManagerFields on GroupProduct {
+  groupId, productId, versionId, discount
+}
+
+fragment ListProductsManagerFields on Product {
+  id, name, slug, manufacturerId, isPublished,
+  images { ...ProductImageManagerFields },
+  versions { ...ProductVersionManagerFields },
+  exclusive
+}
+
+fragment ProductManagerFields on Product {
+  id, name, slug, manufacturerId, descShort, descFull, details,
+  certificates, exclusive, files { ...ProductFileManagerFields },
+  versions { ...ProductVersionManagerFields },
+  images { ...ProductImageManagerFields },
+  groups { ...GroupProductManagerFields },
+  categories, seoTitle, seoDesc, rating,
+  isBestseller, isPublished, isUsed
+}
+
+fragment ProductFileManagerFields on ProductFile {
+  src, name, desc
+}
+
+fragment ProductImageManagerFields on ProductImage {
+  src, alt, breakpoints { ...ImageBreakpointManagerFields }
+}
+
+fragment ImageBreakpointManagerFields on ImageBreakpoint {
+  path, blur, type, media, width, height
+}
+
+fragment ProductVersionManagerFields on ProductVersion {
+  id, productId, sku, size, unit, price,
+  isPublished, isUsed
+}
+
+fragment ListOrdersManagerFields on Order {
+  id, userId, customerName, managerId, managerName, status, isPaid,
+  updatedAt, pendingAt, processingAt, shippedAt, completeAt, canceledAt,
+  refundAt, refundedAt, paymentAt,
+  totalCost
+}
+
+fragment OrderManagerFields on Order {
+  id, userId, status, managerId, shipping, shippingAddress { ...AddressManagerFields },
+  warehouseId, productsCost, shippingCost, taxesValue, taxes { ...ProductTaxManagerFields },
+  totalCost, payment, quarterOfYear, updatedAt, pendingAt, processingAt,
+  shippedAt, completeAt, canceledAt, refundAt, refundedAt,
+  isPaid, paymentAt, estimateDeliveryDate,
+  user { ...UserManagerFields }
+}
+
+fragment AddressManagerFields on Address {
+  country, state, city, zip,
+  addressLine1, addressLine2
+}
+
+fragment ProductTaxManagerFields on ProductTax {
+  id, amount
+}
+
+fragment ListOrderProductsManagerFields on OrderProduct {
+  productId, versionId, name, slug, images { ...ProductImageManagerFields }, certificates,
+  manufacturerName, manufacturerSlug,
+  sku, size, unit, price, quantity, refunded, discount, purchasePrice
+}
+
+fragment OrderEventManagerFields on OrderEvent {
+  eventId, orderId, createdAt, userId, userName,
+  action, message
+}
+
+fragment ListWarehousesManagerFields on Warehouse {
+  id, name, phone, state, city, address, zip,
+  postOfficeBox, isActive
+}
+
+fragment ListCategoriesManagerFields on Category {
+  id, parentId, name, slug, sort, isPublished
+}
+
+fragment CategoryManagerFields on Category {
+  id, parentId, name, slug, desc, seoTitle, seoDesc,
+  sort, isPublished, isUsed, products
+}
+
+fragment CategoryProductManagerFields on CategoryProduct {
+  categoryId, productId
+}
+
+fragment ListManufacturersManagerFields on Manufacturer {
+  id, name, slug
+}
+
+fragment ManufacturerManagerFields on Manufacturer {
+  id, url, name, slug, descShort, descFull, seoTitle, seoDesc
+}
+
+fragment ListCertificatesManagerFields on Certificate {
+  id, abbr, name, icon, slug, descShort, url, sort
+}
+
+fragment CertificateManagerFields on Certificate {
+  id, abbr, name, icon, slug, descShort, descFull, url,
+  seoTitle, seoDesc
+}
+
+fragment SiteDocumentManagerFields on SiteDocument {
+  id, src, name, type, size, date, section, namespace
+}
+
+fragment ListSiteDocumentsManagerFields on SiteDocument {
+  id, src, name, type, size, date, section, namespace
+}
+
+# Refund
+
+fragment OrderRefundManagerFields on OrderRefund {
+  id, orderId, createdAt
+  products { ...RefundProductManagerFields }
+  productsCost, taxesValue, totalCost, status
+}
+
+fragment RefundProductManagerFields on RefundProduct {
+  versionId, quantity
+}
+
+fragment OrderRefundEventManagerFields on OrderRefundEvent {
+  id
+  refundId
+  createdAt
+  actorId
+  actorName
+  action
+  message
+}

@@ -1,0 +1,8 @@
+/static/
+/public/
+/node_modules/
+/env/
+/coverage/
+/.vscode/
+/.cache/
+/__mocks__/

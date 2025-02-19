@@ -1,0 +1,17 @@
+/* @type */
+
+.signInShop {
+  margin-top: 2.4rem;
+}
+
+@media screen and (min-width: 768px) {
+  .signInShop {
+    margin-top: 3.2rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .signInShop {
+    margin-top: 4rem;
+  }
+}

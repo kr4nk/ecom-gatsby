@@ -1,0 +1,31 @@
+/* @type */
+
+.content {
+  flex-direction: column;
+
+  /* This font-size and line-height combination
+  makes the "box" containing the text the same height
+  as in the mockups */
+  font-size: 1.4rem;
+  line-height: 2.8rem;
+  margin: 2.4rem auto 2.4rem;
+  color: #6C5531;
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    font-size: 1.6rem;
+    justify-content: space-between;
+    line-height: 3.2rem;
+    width: 60rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .content {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    width: 68rem;
+  }
+}

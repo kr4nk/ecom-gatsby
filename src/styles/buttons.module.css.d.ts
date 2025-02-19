@@ -1,0 +1,22 @@
+declare const styles: {
+  readonly 'button': string;
+  readonly 'buttonPrimary': string;
+  readonly 'buttonPrimaryText': string;
+  readonly 'buttonSecondary': string;
+  readonly 'buttonDanger': string;
+  readonly 'buttonDangerText': string;
+  readonly 'buttonSuccess': string;
+  readonly 'buttonSmall': string;
+  readonly 'buttonTextSmall': string;
+  readonly 'buttonIcon': string;
+  readonly 'icon': string;
+  readonly 'buttonRow': string;
+  readonly 'buttonField': string;
+  readonly 'buttonCarouselLeft': string;
+  readonly 'buttonCarouselRight': string;
+  readonly 'buttonAddToCart': string;
+  readonly 'angle': string;
+  readonly 'buttonSignNav': string;
+  readonly 'buttonSignNavActive': string;
+};
+export = styles;

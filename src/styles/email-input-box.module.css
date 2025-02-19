@@ -1,0 +1,47 @@
+/* @type */
+
+/* TODO: */
+
+.subscribe {}
+
+.form {
+  margin-bottom: 1.6rem;
+}
+
+.success {
+  margin-top: 1.4rem;
+  color: #417505;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+}
+
+.agree {
+  display: inline-block;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #585858;
+}
+
+.checkbox {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.link {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #1759A6;
+}
+
+.warning {
+  color: #B31204;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  margin: 1.4rem 0;
+}
+
+/* @media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
+} */

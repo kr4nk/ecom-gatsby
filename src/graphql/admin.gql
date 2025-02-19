@@ -1,0 +1,84 @@
+#
+# Query
+#
+
+query getUser($id: ID!) {
+  getUser(id: $id) { ...UserAdminFields }
+}
+
+query listUsers($filter: ListUsersInput, $limit: Int, $nextToken: String) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    ...UserAdminFields
+  }
+}
+
+query getWarehouse($id: ID!) {
+  getWarehouse(id: $id) { ...ListWarehousesAdminFields }
+}
+
+query listWarehouses($filter: ListWarehousesInput, $limit: Int, $nextToken: String) {
+  listWarehouses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    ...ListWarehousesAdminFields
+  }
+}
+
+query getWarehousesCount {
+  getWarehousesCount
+}
+
+#
+# Mutation
+#
+
+mutation createUser($input: UserInput!) {
+  createUser(input: $input) { ...UserAdminFields }
+}
+
+mutation updateUser($input: UserInput!) {
+  updateUser(input: $input) { ...UserAdminFields }
+}
+
+mutation createWarehouse($input: WarehouseInput!) {
+  createWarehouse(input: $input) { ...ListWarehousesAdminFields }
+}
+
+mutation updateWarehouse($input: WarehouseInput!) {
+  updateWarehouse(input: $input) { ...ListWarehousesAdminFields }
+}
+
+mutation databaseFill {
+  databaseFill { ...RequestResultAdminFields }
+}
+
+mutation databaseFillWarehouses {
+  databaseFillWarehouses { ...RequestResultAdminFields }
+}
+
+mutation databaseClearOrders {
+  databaseClearOrders { ...RequestResultAdminFields }
+}
+
+mutation databaseClear {
+  databaseClear { ...RequestResultAdminFields }
+}
+
+mutation netlifyDeploy {
+  netlifyDeploy
+}
+
+#
+# Fragment
+#
+
+fragment UserAdminFields on User {
+  id, role, firstName, lastName, email, phone, createdAt
+}
+
+fragment RequestResultAdminFields on RequestResult {
+  success, error, time
+}
+
+fragment ListWarehousesAdminFields on Warehouse {
+  id, name, slug, phone, state, city, address, zip,
+  postOfficeBox, isActive
+}

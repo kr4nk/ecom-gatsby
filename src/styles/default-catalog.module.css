@@ -1,0 +1,85 @@
+/* @type */
+
+/* TODO: */
+
+.categories {}
+
+.subcategories {}
+
+.products {}
+
+.categoriesList,
+.subcategoriesList {
+  list-style: none;
+}
+
+.subcategoriesList {
+  padding: 0 0.8rem;
+}
+
+.productsList {
+  list-style: none;
+}
+
+.categoryItem {
+  border-bottom: 0.2rem solid #E7E7E7;
+}
+
+.categoryItem:first-child,
+.subcategoryItem {
+  border-top: 0.2rem solid #E7E7E7;
+}
+
+.productItem {
+  border-top: 0.1rem solid #E7E7E7;
+  padding: 2.4rem 0.8rem;
+}
+
+.categoryButton,
+.subcategoryButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  padding: 1.6rem 0.8rem;
+}
+
+.categoryTitle,
+.subcategoryTitle {
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+}
+
+.categoryTitle {
+  font-weight: bold;
+}
+
+.icon {
+  color: #7D7D7D;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-left: 0.8rem;
+  padding: 0.4rem;
+}
+
+@media screen and (min-width: 768px) {
+  .subcategoriesList {
+    padding: 0 1.6rem;
+  }
+
+  .productItem {
+    padding: 2.4rem 1.2rem;
+  }
+
+  .categoryButton,
+  .subcategoryButton {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
+}

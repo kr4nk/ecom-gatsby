@@ -1,0 +1,349 @@
+#
+# Query
+#
+
+query getHome {
+  categories: listCategories { ...CategoryFields }
+  products: listProducts { ...ProductFields }
+  manufacturers: listManufacturers { ...ManufacturerFields }
+  certificates: listCertificates { ...CertificateFields }
+  catalog: listSiteDocuments(filter: { section: "catalogs" }) { ...SiteDocumentFields }
+  documents: listSiteDocuments(filter: { section: "documents" }) { ...SiteDocumentFields }
+  groups: listUserGroups { ...GroupUserFields }
+}
+
+query getShop {
+  categories: listCategories { ...CategoryFields }
+  products: listProducts { ...ProductFields }
+  manufacturers: listManufacturers { ...ManufacturerFields }
+  certificates: listCertificates { ...CertificateFields }
+  warehouses: listWarehouses { ...WarehouseFields }
+  catalog: listSiteDocuments(filter: { section: "catalogs" }) { ...SiteDocumentFields }
+  documents: listSiteDocuments(filter: { section: "documents" }) { ...SiteDocumentFields }
+}
+
+query getUserData {
+  user: getUserData { ...UserFields }
+  cart: getCart { ...CartDataFields }
+  groups: listUserGroups { ...GroupUserFields }
+}
+
+query getOrder($id: ID!) {
+  order: getOrder(id: $id) { ...OrderFields }
+  products: listOrderProducts(id: $id) { ...OrderProductFields }
+  events: listOrderEvents(filter: { orderId: $id }) { ...OrderEventFields },
+  refunds: listOrderRefunds(id: $id) { ...OrderRefundFields }
+}
+
+query listOrders {
+  listOrders { ...OrderFields }
+}
+
+query listOrderEvents($filter: ListOrderEventsFilterInput!, $direction: String, $limit: Int, $nextToken: String) {
+  listOrderEvents(filter: $filter, direction: $direction, limit: $limit, nextToken: $nextToken) {
+    ...OrderEventFields
+  }
+}
+
+query listOrderRefundEvents($filter: ListOrderRefundEventsFilterInput!, $direction: String, $limit: Int, $nextToken: String) {
+  events: listOrderRefundEvents(filter: $filter, direction: $direction, limit: $limit, nextToken: $nextToken) {
+    ...OrderRefundEventFields
+  }
+}
+
+#
+# Mutation
+#
+
+mutation createUser($input: UserInput!) {
+  createUser(input: $input) { ...UserFields }
+}
+
+mutation updateUser($input: UserInput!) {
+  updateUser(input: $input) { ...UserFields }
+}
+
+mutation updateOrder($input: OrderInput!) {
+  updateOrder(input: $input) { ...OrderFields }
+}
+
+mutation updateOrderProduct($input: OrderProductInput!) {
+  updateOrderProduct(input: $input) { ...UpdateProductOrderFields }
+}
+
+mutation createOrderEvent($input: OrderEventInput!) {
+  createOrderEvent(input: $input) { ...OrderEventFields }
+}
+
+mutation createOrderRefundEvent($input: OrderRefundEventInput!) {
+  createOrderRefundEvent(input: $input) { ...OrderRefundEventFields }
+}
+
+#
+# Fragment
+#
+
+fragment CategoryFields on Category {
+  id
+  parentId
+  name
+  slug
+  desc
+  seoTitle
+  seoDesc
+  sort
+  isPublished
+  isUsed
+  products
+}
+
+fragment ProductFields on Product {
+  id
+  name
+  slug
+  manufacturerId
+  descShort
+  descFull
+  details
+  certificates
+  files { ...ProductFileFields }
+  images { ...ProductImageFields }
+  seoTitle
+  seoDesc
+  rating
+  isBestseller
+  isPublished
+  isUsed
+  versions { ...ProductVersionFields }
+}
+
+fragment ProductFileFields on ProductFile {
+  src
+  name
+  desc
+}
+
+fragment ProductImageFields on ProductImage {
+  src
+  alt
+  breakpoints { ...ImageBreakpointFields }
+}
+
+fragment ImageBreakpointFields on ImageBreakpoint {
+  path, blur, type, media, width, height
+}
+
+fragment ProductVersionFields on ProductVersion {
+  id
+  productId
+  sku
+  size
+  unit
+  price
+  isPublished
+  isUsed
+}
+
+fragment ManufacturerFields on Manufacturer {
+  id
+  name
+  slug
+  descShort
+  descFull
+  seoTitle
+  seoDesc
+}
+
+fragment CertificateFields on Certificate {
+  id
+  abbr
+  icon
+  name
+  slug
+  descShort
+  descFull
+  seoTitle
+  seoDesc
+  url
+}
+
+fragment SiteDocumentFields on SiteDocument {
+  id
+  src
+  name
+  type
+  size
+  date
+}
+
+fragment WarehouseFields on Warehouse {
+  id
+  name
+  city
+  address
+  state
+  phone
+  zip
+  postOfficeBox
+  isActive
+}
+
+# User
+
+fragment UserFields on User {
+  id
+  email
+  createdAt
+  firstName
+  lastName
+  phone
+  businessName
+  businessPhone
+  isAddressVerified
+  country
+  state
+  city
+  zip
+  addressLine1
+  addressLine2
+  role
+  isVerified
+  fileResellersPermit
+  resellersPermitUntil
+  fileTaxExemptionForm
+  taxExemptionUntil
+}
+
+# Order
+
+fragment CartProductVersionFields on CartProductVersion {
+  versionId
+  value
+}
+
+fragment CartProductFields on CartProduct {
+  productId
+  versions { ...CartProductVersionFields }
+}
+
+fragment CartDataFields on CartData {
+  orderId
+  items { ...CartProductFields }
+}
+
+fragment AddressFields on Address {
+  country
+  state
+  city
+  zip
+  addressLine1
+  addressLine2
+}
+
+fragment ProdcutTaxFields on ProductTax {
+  id, amount
+}
+
+fragment OrderFields on Order {
+  id
+  userId
+  managerId
+  status
+  shipping
+  shippingAddress { ...AddressFields }
+  warehouseId
+  productsCost
+  shippingCost
+  taxesValue
+  taxes { ...ProdcutTaxFields }
+  totalCost
+  payment,
+  quarterOfYear
+  updatedAt
+  pendingAt
+  processingAt
+  shippedAt
+  completeAt
+  canceledAt
+  refundAt
+  refundedAt
+  isPaid
+  paymentAt
+  estimateDeliveryDate,
+
+  user { ...UserFields }
+}
+
+fragment OrderEventFields on OrderEvent {
+  eventId
+  orderId
+  createdAt
+  userId
+  userName
+  action
+  message
+}
+
+fragment OrderProductFields on OrderProduct {
+  productId
+  versionId
+  name
+  slug
+  images { ...ProductImageFields }
+  certificates
+  manufacturerName
+  manufacturerSlug
+  sku
+  size
+  unit
+  price
+  quantity
+  refunded
+  discount
+  purchasePrice
+}
+
+fragment UpdateProductOrderFields on UpdateOrderProduct {
+  orderId
+  productId
+  versionId
+  value
+}
+
+# Refund
+
+fragment OrderRefundFields on OrderRefund {
+  id
+  orderId
+  createdAt
+  products { ...RefundProductFields }
+  productsCost
+  taxesValue
+  totalCost
+  status
+}
+
+fragment RefundProductFields on RefundProduct {
+  versionId
+  quantity
+}
+
+fragment OrderRefundEventFields on OrderRefundEvent {
+  id
+  refundId
+  createdAt
+  actorId
+  actorName
+  action
+  message
+}
+
+# Groups
+
+fragment GroupUserFields on GroupUser {
+  groupId, products { ...GroupProductFields }
+}
+
+fragment GroupProductFields on GroupProduct {
+  productId, versionId, discount
+}

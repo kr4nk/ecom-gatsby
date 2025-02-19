@@ -1,0 +1,199 @@
+/* @type */
+
+.full {
+  width: 100%;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.ttu {
+  text-transform: uppercase;
+}
+
+.db {
+  display: block;
+}
+
+.dib {
+  display: inline-block;
+}
+
+.dn {
+  display: none;
+}
+
+.df {
+  display: flex;
+}
+
+.dif {
+  display: inline-flex;
+}
+
+.fdr {
+  flex-direction: row;
+}
+
+.fdc {
+  flex-direction: column;
+}
+
+.fww {
+  flex-wrap: wrap;
+}
+
+.fwn {
+  flex-wrap: nowrap;
+}
+
+.aic {
+  align-items: center;
+}
+
+.aibl {
+  align-items: baseline;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.jcsa {
+  justify-content: space-around;
+}
+
+.hidden {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+}
+
+.fl {
+  float: left;
+}
+
+.group {
+  display: flow-root;
+}
+
+.group::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.cp {
+  cursor: pointer;
+}
+
+.round {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.pen {
+  pointer-events: none;
+}
+
+.pea {
+  pointer-events: auto;
+}
+
+.ust {
+  user-select: text;
+}
+
+.pr {
+  position: relative;
+}
+
+.pa {
+  position: absolute;
+}
+
+.top {
+  top: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.zi1 {
+  z-index: 1;
+}
+
+.zi2 {
+  z-index: 2;
+}
+
+.tac {
+  text-align: center;
+}
+
+.tal {
+  text-align: left;
+}
+
+.tar {
+  text-align: right;
+}
+
+.lsn {
+  list-style: none;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.tdn {
+  text-decoration: none;
+}
+
+.ma {
+  margin: 0 auto;
+}
+
+.mt8 {
+  margin-top: 0.8rem;
+}
+
+.mt12 {
+  margin-top: 1.2rem;
+}
+
+.mb8 {
+  margin-bottom: 0.8rem;
+}
+
+.mb16 {
+  margin-bottom: 1.6rem;
+}
+
+.mb24 {
+  margin-bottom: 2.4rem;
+}
+
+.ml16 {
+  margin-left: 1.6rem;
+}
+
+.wwbw {
+  word-wrap: break-word;
+}
+
+.grayDark {
+  color: #585858;
+}

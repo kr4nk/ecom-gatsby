@@ -1,0 +1,26 @@
+declare const styles: {
+  readonly 'fieldSet': string;
+  readonly 'field': string;
+  readonly 'label': string;
+  readonly 'input': string;
+  readonly 'text': string;
+  readonly 'disabled': string;
+  readonly 'inputIcon': string;
+  readonly 'icon': string;
+  readonly 'iconPayment': string;
+  readonly 'textarea': string;
+  readonly 'textareaSmall': string;
+  readonly 'checkbox': string;
+  readonly 'checkboxGray': string;
+  readonly 'checkboxInput': string;
+  readonly 'description': string;
+  readonly 'valid': string;
+  readonly 'invalid': string;
+  readonly 'invalidWarning': string;
+  readonly 'requiredFields': string;
+  readonly 'alert': string;
+  readonly 'alertInfo': string;
+  readonly 'alertError': string;
+  readonly 'iconAlert': string;
+};
+export = styles;
